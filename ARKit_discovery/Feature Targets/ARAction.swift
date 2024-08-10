@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum ARAction {
-    case placeBlock(color: Color), removeAllAnchors
+    case placeModel(_ model: String), removeAllAnchors
 }
 
 

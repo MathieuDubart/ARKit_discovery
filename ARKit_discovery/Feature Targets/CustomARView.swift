@@ -42,21 +42,21 @@ class CustomARView: ARView {
             .actionStream
             .sink { [weak self] action in
                 switch action {
-                case .placeBlock(let color): self?.placeColorBlock(color)
+                case .placeModel(let model): self?.placeModel(model)
                 case .removeAllAnchors: self?.scene.anchors.removeAll()
                 }
             }
             .store(in: &cancellables)
     }
     
-    func placeColorBlock(_ color: Color) {
-        let block = MeshResource.generateBox(size: 0.3)
-        let material = SimpleMaterial(color: UIColor(color), isMetallic: false)
-        let entity = ModelEntity(mesh: block, materials: [material])
+    func placeModel(_ model: String) {
+        let entity = try? Entity.load(named: model)
         
         let anchor = AnchorEntity(plane: .horizontal)
         
-        anchor.addChild(entity)
+        if let entity = entity {
+            anchor.addChild(entity)
+        }
         
         scene.addAnchor(anchor)
     }

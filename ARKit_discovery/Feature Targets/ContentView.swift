@@ -7,14 +7,20 @@
 
 import SwiftUI
 
+enum FileType: String {
+    case usdz, reality
+}
+
 struct ContentView: View {
-    @State private var colors: [Color] = [
-        .green,
-        .blue,
-        .yellow,
-        .orange,
-        .purple
+    @State private var models: [String] = [
+        "biplane",
+        "guitare",
+        "robot",
+        "tv",
+        "lunar_rover",
+        "cosmonaut_suit"
     ]
+    
     var body: some View {
         VStack {
             CustomARViewRepresentable()
@@ -34,11 +40,11 @@ struct ContentView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
                             }
                             
-                            ForEach(colors, id:\.self) { color in
+                            ForEach(models, id:\.self) { model in
                                 Button {
-                                    ARManager.shared.actionStream.send(.placeBlock(color: color))
+                                    ARManager.shared.actionStream.send(.placeModel(model))
                                 } label: {
-                                    color
+                                    Text("\(model)")
                                         .frame(width: 40, height: 40)
                                         .padding()
                                         .background(.regularMaterial)
