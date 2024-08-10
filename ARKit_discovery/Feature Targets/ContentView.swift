@@ -18,7 +18,9 @@ struct ContentView: View {
         "robot",
         "tv",
         "lunar_rover",
-        "cosmonaut_suit"
+        "cosmonaut_suit",
+        "skateboard",
+        "rocket"
     ]
     
     var body: some View {

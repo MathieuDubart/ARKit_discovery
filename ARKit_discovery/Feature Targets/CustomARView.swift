@@ -50,15 +50,16 @@ class CustomARView: ARView {
     }
     
     func placeModel(_ model: String) {
-        let entity = try? Entity.load(named: model)
-        
         let anchor = AnchorEntity(plane: .horizontal)
         
-        if let entity = entity {
-            anchor.addChild(entity)
+        guard let entity = try? Entity.load(named: model) else {
+            return
         }
         
+        anchor.addChild(entity)
+        
         scene.addAnchor(anchor)
+        
     }
     
     /*
